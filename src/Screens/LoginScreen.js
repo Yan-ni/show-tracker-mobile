@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import {
+  Alert,
   Keyboard,
+  Pressable,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -47,10 +49,41 @@ function LoginScreen({setIsConnected, connectionStore}) {
             errorMessage={connectionStore.errorMessages.password}>
             password
           </TextInputGroupe>
+          <Pressable
+            onPress={() =>
+              Alert.alert(
+                'Error',
+                "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
+                [
+                  {
+                    text: 'ok',
+                  },
+                ],
+                {
+                  cancelable: true,
+                },
+              )
+            }>
+            <Text style={textStyles.LinkText}>Forgot Password ?</Text>
+          </Pressable>
 
-          <Text style={textStyles.LinkText}>Forgot Password ?</Text>
-          <Text style={textStyles.LinkText}>create an account</Text>
-
+          <Pressable
+            onPress={() =>
+              Alert.alert(
+                'Error',
+                "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
+                [
+                  {
+                    text: 'ok',
+                  },
+                ],
+                {
+                  cancelable: true,
+                },
+              )
+            }>
+            <Text style={textStyles.LinkText}>create an account</Text>
+          </Pressable>
           <Button
             buttonStyle={{alignSelf: 'flex-end', elevation: 2}}
             onPress={() => connectionStore.connect({username, password})}
