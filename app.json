@@ -1,4 +1,24 @@
 {
-  "name": "rnShowTracker",
-  "displayName": "rnShowTracker"
+  "name": "show tracker",
+  "expo": {
+    "name": "show tracker",
+    "slug": "show-tracker",
+    "owner": "yan-ni",
+    "sdkVersion": "44.0.0",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "android/app/src/main/res/playstore-icon.png",
+    "splash": {
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain",
+      "image": "android/app/src/main/res/playstore-icon.png"
+    },
+    "android": {
+      "package": "com.yanni.showtracker"
+    },
+    "assetBundlePatterns": [
+      "src/assets/images/*",
+      "src/assets/fonts/*"
+    ]
+  }
 }
