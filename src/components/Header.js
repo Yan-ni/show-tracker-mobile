@@ -36,7 +36,25 @@ export default function Header({connectionStore}) {
           />
         </Pressable>
 
-        <Pressable onPress={() => connectionStore.disconnect()}>
+        <Pressable
+          onPress={() => {
+            Alert.alert(
+              'Warning',
+              'are you sure you want to disconnect ?',
+              [
+                {
+                  text: 'no',
+                },
+                {
+                  text: 'yes',
+                  onPress: () => connectionStore.disconnect(),
+                },
+              ],
+              {
+                cancelable: true,
+              },
+            );
+          }}>
           <Image
             style={{
               width: 22,

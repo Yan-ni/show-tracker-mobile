@@ -322,7 +322,24 @@ const CollectionOptions = ({collectionStore}) => (
       textStyle={{
         fontSize: 12,
       }}
-      onPress={() => collectionStore.deleteCollection()}>
+      onPress={() => {
+        Alert.alert(
+          'Warning',
+          'are you sure you want to delete this collection ?',
+          [
+            {
+              text: 'no',
+            },
+            {
+              text: 'yes',
+              onPress: () => collectionStore.deleteCollection(),
+            },
+          ],
+          {
+            cancelable: true,
+          },
+        );
+      }}>
       delete collection
     </Button>
   </View>
