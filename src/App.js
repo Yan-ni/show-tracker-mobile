@@ -1,6 +1,7 @@
 import * as Font from 'expo-font';
 import { observer } from 'mobx-react';
 import React, { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
 import AppScreen from './Screens/AppScreen';
 import LoginScreen from './Screens/LoginScreen';
 import connectionStore from './stores/conncetionStore';
@@ -21,12 +22,18 @@ function App () {
   useEffect(() => {
     loadFonts().then(() => setFontsLoaded(true));
   }, []);
-  
-  return fontsLoaded && (connectionStore.isConnected ? (
-    <AppScreen connectionStore={connectionStore} />
-  ) : (
-    <LoginScreen connectionStore={connectionStore} />
-  ));
+
+  return (
+    <>
+      <StatusBar backgroundColor="#ffffff00" barStyle="dark-content" />
+      {fontsLoaded &&
+        (connectionStore.isConnected ? (
+          <AppScreen connectionStore={connectionStore} />
+        ) : (
+          <LoginScreen connectionStore={connectionStore} />
+        ))}
+    </>
+  );
 }
 
 export default observer(App);
