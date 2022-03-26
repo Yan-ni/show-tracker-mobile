@@ -46,7 +46,7 @@ class CollectionStore {
   }
 
   syncCollections() {
-    axios
+    return axios
       .get(`${BASE_URL}/api/user`)
       .then(res => {
         this.setCollections(res.data.Collections);
@@ -56,8 +56,8 @@ class CollectionStore {
       .catch(error => console.error(error));
   }
 
-  addShow(show, setShowNameErrorMessage, setAddShowModalVisibility) {
-    axios
+  addShow(show, setShowNameErrorMessage) {
+    return axios
       .post(`${BASE_URL}/api/show`, show)
       .then(res => {
         let newCollections = Object.create(this.collections);
@@ -67,7 +67,6 @@ class CollectionStore {
             collection.Shows.push(res.data);
         });
         this.setCollections(newCollections);
-        setAddShowModalVisibility(false);
       })
       .catch(error => {
         if (
@@ -75,11 +74,11 @@ class CollectionStore {
           error.response.data &&
           error.response.data.name === 'ValidationError'
         ) {
-          const error = error.response.data.errors[0];
-          setShowNameErrorMessage(error.message);
+          setShowNameErrorMessage(error.response.data.errors[0].message);
         } else {
           console.error(error);
         }
+        return error;
       });
   }
 
@@ -115,12 +114,8 @@ class CollectionStore {
       .catch(error => console.error(error));
   }
 
-  addCollection(
-    collection,
-    setCollectionNameErrorMessage,
-    setAddCollectionModalVisibility,
-  ) {
-    axios
+  addCollection(collection, setCollectionNameErrorMessage) {
+    return axios
       .post(`${BASE_URL}/api/collection`, collection)
       .then(res => {
         this.setCollections([
@@ -131,7 +126,6 @@ class CollectionStore {
             Shows: [],
           },
         ]);
-        setAddCollectionModalVisibility(false);
       })
       .catch(error => {
         if (
@@ -139,11 +133,11 @@ class CollectionStore {
           error.response.data &&
           error.response.data.name === 'ValidationError'
         ) {
-          const error = error.response.data.errors[0];
-          setCollectionNameErrorMessage(error.message);
+          setCollectionNameErrorMessage(error.response.data.errors[0].message);
         } else {
           console.error(error);
         }
+        return error;
       });
   }
 

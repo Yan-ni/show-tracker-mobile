@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Keyboard,
   Pressable,
@@ -12,88 +13,103 @@ import {
 import Button from '../components/Button';
 import TextInputGroupe from '../components/TextInputGroupe';
 
-function LoginScreen({setIsConnected, connectionStore}) {
+function LoginScreen({connectionStore}) {
+  const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View
-        style={styles.mainView}
-        onPress={Keyboard.dismiss}
-        accessible={false}>
-        <View style={styles.loginContainer}>
-          <Text style={textStyles.loginText}>Login</Text>
-
-          <TextInputGroupe
-            autoComplete="username"
-            placeholder="Your username or Email"
-            onChangeText={text => {
-              setUsername(text);
-              connectionStore.clearUsernameErrorMessage();
-            }}
-            errorMessage={connectionStore.errorMessages.username}>
-            username
-          </TextInputGroupe>
-
-          <TextInputGroupe
-            style={{
-              marginVertical: 15,
-            }}
-            secureTextEntry={true}
-            placeholder="Your password"
-            onChangeText={text => {
-              setPassword(text);
-              connectionStore.clearPasswordErrorMessage();
-            }}
-            errorMessage={connectionStore.errorMessages.password}>
-            password
-          </TextInputGroupe>
-          <Pressable
-            onPress={() =>
-              Alert.alert(
-                'Error',
-                "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
-                [
-                  {
-                    text: 'ok',
-                  },
-                ],
-                {
-                  cancelable: true,
-                },
-              )
-            }>
-            <Text style={textStyles.LinkText}>Forgot Password ?</Text>
-          </Pressable>
-
-          <Pressable
-            onPress={() =>
-              Alert.alert(
-                'Error',
-                "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
-                [
-                  {
-                    text: 'ok',
-                  },
-                ],
-                {
-                  cancelable: true,
-                },
-              )
-            }>
-            <Text style={textStyles.LinkText}>create an account</Text>
-          </Pressable>
-          <Button
-            buttonStyle={{alignSelf: 'flex-end', elevation: 2}}
-            onPress={() => connectionStore.connect({username, password})}
-            pressBackground="#1b7cda">
-            Login
-          </Button>
-        </View>
+  if (isLoading)
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#2745F2" />
       </View>
-    </TouchableWithoutFeedback>
-  );
+    );
+  else
+    return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View
+          style={styles.mainView}
+          onPress={Keyboard.dismiss}
+          accessible={false}>
+          <View style={styles.loginContainer}>
+            <Text style={textStyles.loginText}>Login</Text>
+
+            <TextInputGroupe
+              autoComplete="username"
+              placeholder="Your username or Email"
+              defaultValue={username}
+              onChangeText={text => {
+                setUsername(text);
+                connectionStore.clearUsernameErrorMessage();
+              }}
+              errorMessage={connectionStore.errorMessages.username}>
+              username
+            </TextInputGroupe>
+
+            <TextInputGroupe
+              style={{
+                marginVertical: 15,
+              }}
+              secureTextEntry={true}
+              placeholder="Your password"
+              defaultValue={password}
+              onChangeText={text => {
+                setPassword(text);
+                connectionStore.clearPasswordErrorMessage();
+              }}
+              errorMessage={connectionStore.errorMessages.password}>
+              password
+            </TextInputGroupe>
+            <Pressable
+              onPress={() =>
+                Alert.alert(
+                  'Error',
+                  "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
+                  [
+                    {
+                      text: 'ok',
+                    },
+                  ],
+                  {
+                    cancelable: true,
+                  },
+                )
+              }>
+              <Text style={textStyles.LinkText}>Forgot Password ?</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() =>
+                Alert.alert(
+                  'Error',
+                  "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
+                  [
+                    {
+                      text: 'ok',
+                    },
+                  ],
+                  {
+                    cancelable: true,
+                  },
+                )
+              }>
+              <Text style={textStyles.LinkText}>create an account</Text>
+            </Pressable>
+            <Button
+              buttonStyle={{alignSelf: 'flex-end', elevation: 2}}
+              onPress={() => {
+                setIsLoading(true);
+                connectionStore
+                  .connect({username, password})
+                  .then(() => setIsLoading(false));
+              }}
+              pressBackground="#1b7cda">
+              Login
+            </Button>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
 }
 
 export default observer(LoginScreen);
@@ -131,5 +147,12 @@ const styles = StyleSheet.create({
     width: '90%',
     elevation: 5,
     borderRadius: 10,
+  },
+  center: {
+    display: 'flex',
+    alignContent: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#fff',
   },
 });

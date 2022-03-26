@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Image,
+  StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
@@ -44,11 +46,21 @@ export default function AppBodyHeader({collectionStore}) {
   );
 }
 
+const styles = StyleSheet.create({
+  center: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+});
+
 const NewShowModal = ({
   setAddShowModalVisibility,
   collectionStore,
   ...props
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showName, setShowName] = useState('');
   const [showDescription, setShowDescription] = useState('');
 
@@ -59,134 +71,153 @@ const NewShowModal = ({
 
   return (
     <Modal {...props}>
-      <Text
-        style={{
-          fontFamily: 'Poppins-SemiBold',
-          fontSize: 24,
-          color: '#1B78F2',
-          textAlign: 'center',
-        }}>
-        New show
-      </Text>
-
-      <TextInputGroupe
-        placeholder="Name"
-        style={{marginTop: 20}}
-        errorMessage={showNameErrorMessage}
-        onChangeText={text => {
-          setShowName(text);
-          setShowNameErrorMessage(null);
-        }}>
-        Show name
-      </TextInputGroupe>
-
-      <TextInputGroupe
-        multiline
-        numberOfLines={4}
-        placeholder="show's synopsis"
-        textAlignVertical="top"
-        style={{marginTop: 20}}
-        onChangeText={text => setShowDescription(text)}>
-        Show Descreption
-      </TextInputGroupe>
-
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          marginTop: 20,
-        }}>
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}>
+      {isLoading ? (
+        <View style={styles.center}>
+          <ActivityIndicator size="large" color="#2745F2" />
+        </View>
+      ) : (
+        <>
           <Text
             style={{
               fontFamily: 'Poppins-SemiBold',
-              fontSize: 16,
-              color: '#333',
-              marginBottom: 10,
+              fontSize: 24,
+              color: '#1B78F2',
+              textAlign: 'center',
             }}>
-            seasons watched
+            New show
           </Text>
-          <TextInputGroupe
-            textAlign="center"
-            keyboardType="numeric"
-            TextInputStyle={{padding: 5, paddingBottom: 2}}
-            value={seasonsWatched}
-            selectTextOnFocus
-            onChangeText={text => setSeasonsWatched(text)}
-          />
-        </View>
 
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}>
-          <Text
+          <TextInputGroupe
+            placeholder="Name"
+            style={{marginTop: 20}}
+            errorMessage={showNameErrorMessage}
+            onChangeText={text => {
+              setShowName(text);
+              setShowNameErrorMessage(null);
+            }}>
+            Show name
+          </TextInputGroupe>
+
+          <TextInputGroupe
+            multiline
+            numberOfLines={4}
+            placeholder="show's synopsis"
+            textAlignVertical="top"
+            style={{marginTop: 20}}
+            onChangeText={text => setShowDescription(text)}>
+            Show Descreption
+          </TextInputGroupe>
+
+          <View
             style={{
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: 16,
-              color: '#333',
-              marginBottom: 10,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+              marginTop: 20,
             }}>
-            episodes watched
-          </Text>
-          <TextInputGroupe
-            textAlign="center"
-            keyboardType="numeric"
-            TextInputStyle={{padding: 5, paddingBottom: 2}}
-            value={episodesWatched}
-            selectTextOnFocus
-            onChangeText={text => setEpisodesWatched(text)}
-          />
-        </View>
-      </View>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-SemiBold',
+                  fontSize: 16,
+                  color: '#333',
+                  marginBottom: 10,
+                }}>
+                seasons watched
+              </Text>
+              <TextInputGroupe
+                textAlign="center"
+                keyboardType="numeric"
+                TextInputStyle={{padding: 5, paddingBottom: 2}}
+                value={seasonsWatched}
+                selectTextOnFocus
+                onChangeText={text => setSeasonsWatched(text)}
+              />
+            </View>
 
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          marginTop: 30,
-        }}>
-        <Button
-          buttonStyle={{
-            backgroundColor: '#EBEBEB',
-            marginRight: 20,
-          }}
-          textStyle={{
-            color: '#212121',
-          }}
-          onPress={() => setAddShowModalVisibility(false)}>
-          Cancel
-        </Button>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-SemiBold',
+                  fontSize: 16,
+                  color: '#333',
+                  marginBottom: 10,
+                }}>
+                episodes watched
+              </Text>
+              <TextInputGroupe
+                textAlign="center"
+                keyboardType="numeric"
+                TextInputStyle={{padding: 5, paddingBottom: 2}}
+                value={episodesWatched}
+                selectTextOnFocus
+                onChangeText={text => setEpisodesWatched(text)}
+              />
+            </View>
+          </View>
 
-        <Button
-          buttonStyle={{
-            backgroundColor: '#1B78F2',
-          }}
-          onPress={() =>
-            collectionStore.addShow(
-              {
-                collection_id: collectionStore.selectedCollectionId,
-                show_name: showName,
-                show_description: showDescription,
-                seasons_watched: seasonsWatched,
-                episodes_watched: episodesWatched,
-              },
-              setShowNameErrorMessage,
-              setAddShowModalVisibility,
-            )
-          }>
-          Add
-        </Button>
-      </View>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              marginTop: 30,
+            }}>
+            <Button
+              buttonStyle={{
+                backgroundColor: '#EBEBEB',
+                marginRight: 20,
+              }}
+              textStyle={{
+                color: '#212121',
+              }}
+              onPress={() => setAddShowModalVisibility(false)}>
+              Cancel
+            </Button>
+
+            <Button
+              buttonStyle={{
+                backgroundColor: '#1B78F2',
+              }}
+              onPress={() => {
+                setIsLoading(true);
+                collectionStore
+                  .addShow(
+                    {
+                      collection_id: collectionStore.selectedCollectionId,
+                      show_name: showName,
+                      show_description: showDescription,
+                      seasons_watched: seasonsWatched,
+                      episodes_watched: episodesWatched,
+                    },
+                    setShowNameErrorMessage,
+                  )
+                  .then(res => {
+                    if (!res || res.name !== 'Error') {
+                      setAddShowModalVisibility(false);
+                      setShowName('');
+                      setShowDescription('');
+                      setSeasonsWatched(0);
+                      setEpisodesWatched(0);
+                    }
+                  })
+                  .finally(() => setIsLoading(false));
+              }}>
+              Add
+            </Button>
+          </View>
+        </>
+      )}
     </Modal>
   );
 };

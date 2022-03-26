@@ -69,8 +69,8 @@ class ConnectionStore {
     this.errorMessages.password = errorMessage;
   }
 
-  connect(credentials) {
-    axios
+  async connect(credentials) {
+    return await axios
       .post(`${BASE_URL}/api/authenticate/login`, credentials)
       .then(res => {
         this.saveAuthToken(res.data.authorization);
