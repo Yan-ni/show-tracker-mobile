@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, Vibration } from 'react-native';
 
 export default function Button({
   textStyle,
@@ -26,7 +26,10 @@ export default function Button({
       }
       onHideUnderlay={() => setIsPress(false)}
       onShowUnderlay={() => setIsPress(true)}
-      onPress={onPress}>
+      onPress={() => {
+        Vibration.vibrate(50);
+        onPress();
+      }}>
       <Text style={[defaultStyles.buttonText, textStyle]}>{children}</Text>
     </TouchableHighlight>
   );

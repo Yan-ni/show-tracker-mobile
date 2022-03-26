@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, Vibration } from 'react-native';
 
 export default function RoundedButton({
   children,
@@ -15,7 +15,10 @@ export default function RoundedButton({
   return (
     <Pressable
       style={[defaultStyles.roundedButton, buttonStyle]}
-      onPress={onPress}>
+      onPress={() => {
+        Vibration.vibrate(50);
+        onPress();
+      }}>
       <Text style={[defaultStyles.roundedButtonText, textStyle]}>
         {children}
       </Text>
