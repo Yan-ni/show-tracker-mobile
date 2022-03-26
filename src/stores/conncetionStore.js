@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { action, makeObservable, observable } from 'mobx';
 import { BASE_URL } from '../config/constants.config';
@@ -7,7 +8,7 @@ class ConnectionStore {
     makeObservable(this, {
       isConnected: observable,
       connect: action,
-      setConnected: action,
+      setIsConnected: action,
       disconnect: action,
       errorMessages: observable,
       clearUsernameErrorMessage: action,
@@ -15,6 +16,8 @@ class ConnectionStore {
       setUsernameErrorMessage: action,
       setPasswordErrorMessage: action,
     });
+
+    this.verifySavedConnectionState();
   }
 
   isConnected = false;
@@ -23,6 +26,32 @@ class ConnectionStore {
     username: null,
     password: null,
   };
+
+  async verifySavedConnectionState() {
+    try {
+      const authorization = await AsyncStorage.getItem('authorization');
+
+      if (!authorization) return this.setIsConnected(false);
+
+      axios.defaults.headers.common['authorization'] = authorization;
+      return this.setIsConnected(true);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async saveAuthToken(authToken) {
+    try {
+      if (authToken) await AsyncStorage.setItem('authorization', authToken);
+      else await AsyncStorage.removeItem('authorization');
+
+      axios.defaults.headers.common['authorization'] = authToken;
+
+      this.setIsConnected(!!authToken);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   clearUsernameErrorMessage() {
     this.errorMessages.username = null;
@@ -44,8 +73,7 @@ class ConnectionStore {
     axios
       .post(`${BASE_URL}/api/authenticate/login`, credentials)
       .then(res => {
-        axios.defaults.headers.common['Authorization'] = res.data.authorization;
-        this.setConnected();
+        this.saveAuthToken(res.data.authorization);
       })
       .catch(error => {
         if (error.response.data.name === 'ValidationError') {
@@ -63,13 +91,12 @@ class ConnectionStore {
       });
   }
 
-  setConnected() {
-    this.isConnected = true;
+  setIsConnected(state) {
+    this.isConnected = state;
   }
 
   disconnect() {
-    axios.defaults.headers.common['Authorization'] = undefined;
-    this.isConnected = false;
+    this.saveAuthToken(null);
   }
 }
 
