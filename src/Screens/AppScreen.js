@@ -2,12 +2,12 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppBody from '../components/AppBody';
-import Header from '../components/Header';
+import AppHead from '../components/AppHead';
 
 function AppScreen({connectionStore}) {
   return (
     <View style={styles.mainView}>
-      <Header connectionStore={connectionStore} />
+      <AppHead connectionStore={connectionStore} />
       <AppBody />
     </View>
   );

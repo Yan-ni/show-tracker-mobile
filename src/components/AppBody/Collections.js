@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import {
-  ActivityIndicator,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -9,9 +8,7 @@ import {
   View
 } from 'react-native';
 import Button from '../Button';
-import Modal from '../Modal';
-import RoundedButton from '../RoundedButton';
-import TextInputGroupe from '../TextInputGroupe';
+import NewCollectionModal from './Modals/NewCollectionModal';
 
 function Collections({collectionStore}) {
   const [addCollectionModalVisibility, setAddCollectionModalVisibility] =
@@ -47,11 +44,12 @@ function Collections({collectionStore}) {
           )}
       </ScrollView>
 
-      <RoundedButton
-        buttonStyle={{marginLeft: 10}}
+      <Button
+        rounded={true}
+        buttonStyle={{marginLeft: 10, width: 32}}
         onPress={() => setAddCollectionModalVisibility(true)}>
         +
-      </RoundedButton>
+      </Button>
 
       <NewCollectionModal
         collectionStore={collectionStore}
@@ -84,97 +82,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-const NewCollectionModal = ({
-  collectionStore,
-  setAddCollectionModalVisibility,
-  ...props
-}) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [collectionName, setCollectionName] = useState(null);
-  const [collectionNameErrorMessage, setCollectionNameErrorMessage] =
-    useState(null);
-
-  return (
-    <Modal {...props}>
-      {isLoading ? (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color="#2745F2" />
-        </View>
-      ) : (
-        <>
-          <Text
-            style={{
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: 24,
-              color: '#1B78F2',
-              textAlign: 'center',
-            }}>
-            New collection
-          </Text>
-
-          <TextInputGroupe
-            placeholder="Name"
-            style={{marginTop: 20}}
-            errorMessage={collectionNameErrorMessage}
-            onChangeText={text => {
-              setCollectionName(text);
-              setCollectionNameErrorMessage(null);
-            }}>
-            Collection name
-          </TextInputGroupe>
-
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              marginTop: 30,
-            }}>
-            <Button
-              buttonStyle={{
-                backgroundColor: '#EBEBEB',
-                marginRight: 20,
-              }}
-              textStyle={{
-                color: '#212121',
-              }}
-              onPress={() => setAddCollectionModalVisibility(false)}>
-              Cancel
-            </Button>
-
-            <Button
-              buttonStyle={{
-                backgroundColor: '#1B78F2',
-              }}
-              onPress={() => {
-                setIsLoading(true);
-                collectionStore
-                  .addCollection(
-                    {
-                      collection_name: collectionName,
-                    },
-                    setCollectionNameErrorMessage,
-                  )
-                  .then(res => {
-                    if (!res || res.name !== 'Error') {
-                      setAddCollectionModalVisibility(false);
-                      setCollectionName('');
-                    }
-                  })
-                  .finally(() => {
-                    setIsLoading(false);
-                  });
-              }}>
-              Add
-            </Button>
-          </View>
-        </>
-      )}
-    </Modal>
-  );
-};
 
 const Collection = ({
   children,

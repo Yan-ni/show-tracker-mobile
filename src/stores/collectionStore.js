@@ -61,7 +61,6 @@ class CollectionStore {
       .post(`${BASE_URL}/api/show`, show)
       .then(res => {
         let newCollections = Object.create(this.collections);
-        console.log(JSON.stringify(newCollections, null, 4));
         newCollections.forEach(collection => {
           if (collection.collection_id === this.selectedCollectionId)
             collection.Shows.push(res.data);
@@ -98,11 +97,6 @@ class CollectionStore {
           );
           let newShow = collection.Shows.find(
             ({show_id}) => show_id === show.showId,
-          );
-          console.log('show.showId', show.showId);
-          console.log(
-            'collectionShows ',
-            JSON.stringify(collection.Shows, null, 4),
           );
 
           newShow.seasons_watched = show.seasonsWatched;

@@ -96,7 +96,7 @@ function LoginScreen({connectionStore}) {
               <Text style={textStyles.LinkText}>create an account</Text>
             </Pressable>
             <Button
-              buttonStyle={{alignSelf: 'flex-end', elevation: 2}}
+              buttonStyle={{alignSelf: 'flex-end', backgroundColor: '#1B78F2'}}
               onPress={() => {
                 setIsLoading(true);
                 connectionStore

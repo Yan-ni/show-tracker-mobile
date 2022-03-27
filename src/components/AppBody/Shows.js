@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import collectionStore from '../../stores/collectionStore';
 import Button from '../Button';
-import RoundedButton from '../RoundedButton';
 
 function Shows({collectionStore}) {
   return (
@@ -232,17 +231,14 @@ const Counter = ({children, title, style, disabled, setCounter}) => (
         alignItems: 'center',
       }}>
       {disabled || (
-        <RoundedButton
-          buttonStyle={{
-            width: 25,
-            height: 25,
-          }}
+        <Button
+          rounded={true}
           textStyle={{
             fontSize: 16,
           }}
           onPress={() => setCounter(`${parseInt(children) - 1}`)}>
           -
-        </RoundedButton>
+        </Button>
       )}
 
       <Text
@@ -258,17 +254,14 @@ const Counter = ({children, title, style, disabled, setCounter}) => (
       </Text>
 
       {disabled || (
-        <RoundedButton
-          buttonStyle={{
-            width: 25,
-            height: 25,
-          }}
+        <Button
+          rounded={true}
           textStyle={{
             fontSize: 16,
           }}
           onPress={() => setCounter(`${parseInt(children) + 1}`)}>
           +
-        </RoundedButton>
+        </Button>
       )}
     </View>
   </View>
@@ -295,7 +288,6 @@ const CollectionOptions = ({collectionStore}) => (
     <Button
       buttonStyle={{
         borderRadius: 20,
-        backgroundColor: '#2745F2',
         marginRight: 15,
       }}
       textStyle={{

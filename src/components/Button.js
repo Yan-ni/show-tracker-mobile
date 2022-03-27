@@ -8,8 +8,27 @@ export default function Button({
   pressStyle,
   pressBackground,
   children,
+  rounded,
 }) {
   const [isPress, setIsPress] = useState(false);
+
+  if (rounded) {
+    if (!buttonStyle) var buttonStyle = {};
+
+    // only the width or the height need to specified
+    buttonStyle.width = buttonStyle.width || buttonStyle.height;
+    buttonStyle.height = buttonStyle.width;
+
+    //default values for width and height if neither are specified
+    if (!buttonStyle.width && !buttonStyle.height) {
+      buttonStyle.width = 25;
+      buttonStyle.height = 25;
+    }
+
+    buttonStyle.paddingVertical = 0;
+    buttonStyle.paddingHorizontal = 0;
+    buttonStyle.borderRadius = (buttonStyle.width || buttonStyle.height) / 2;
+  }
 
   return (
     <TouchableHighlight
@@ -37,16 +56,19 @@ export default function Button({
 
 const defaultStyles = StyleSheet.create({
   button: {
-    backgroundColor: '#1B78F2',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2745F2',
     paddingVertical: 8,
     paddingHorizontal: 15,
-    paddingTop: 10,
     borderRadius: 5,
     elevation: 3,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
+    paddingTop: 3,
     fontFamily: 'Poppins-Regular',
   },
 });

@@ -32,7 +32,7 @@ export default function Header({connectionStore}) {
               height: 22,
               marginRight: 18,
             }}
-            source={require('../assets/images/settings.png')}
+            source={require('../../assets/images/settings.png')}
           />
         </Pressable>
 
@@ -60,7 +60,7 @@ export default function Header({connectionStore}) {
               width: 22,
               height: 22,
             }}
-            source={require('../assets/images/logout.png')}
+            source={require('../../assets/images/logout.png')}
           />
         </Pressable>
       </View>
