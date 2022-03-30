@@ -1,13 +1,17 @@
 import { observer } from 'mobx-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import collectionStore from '../../stores/collectionStore';
 import Collections from './Collections';
 import AppBodyHeader from './Header';
 import Shows from './Shows';
 
+import { StoreContext } from '../../App';
+
 function AppBody() {
+  const { collectionStore } = useContext(StoreContext);
+
   const [isLoading, setIsLoading] = useState(false);
+  
   useEffect(() => {
     setIsLoading(true);
     collectionStore.syncCollections().then(() => setIsLoading(false));
@@ -22,10 +26,10 @@ function AppBody() {
   else
     return (
       <View style={styles.appBodyView}>
-        <AppBodyHeader collectionStore={collectionStore} />
-        <Collections collectionStore={collectionStore} />
+        <AppBodyHeader />
+        <Collections />
         <Hr />
-        <Shows collectionStore={collectionStore} />
+        <Shows />
       </View>
     );
 }

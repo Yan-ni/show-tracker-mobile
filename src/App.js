@@ -1,10 +1,14 @@
 import { useFonts } from 'expo-font';
 import { observer } from 'mobx-react';
-import React from 'react';
+import React, { createContext } from 'react';
 import { StatusBar } from 'react-native';
 import AppScreen from './Screens/AppScreen';
 import LoginScreen from './Screens/LoginScreen';
+
 import connectionStore from './stores/conncetionStore';
+import collectionStore from './stores/collectionStore';
+
+export const StoreContext = createContext();
 
 function App() {
   const [fontsLoaded] = useFonts({
@@ -16,15 +20,15 @@ function App() {
   });
 
   return (
-    <>
+    <StoreContext.Provider value={{connectionStore, collectionStore}}>
       <StatusBar backgroundColor="#ffffff00" barStyle="dark-content" />
       {fontsLoaded &&
         (connectionStore.isConnected ? (
-          <AppScreen connectionStore={connectionStore} />
+          <AppScreen />
         ) : (
-          <LoginScreen connectionStore={connectionStore} />
+          <LoginScreen />
         ))}
-    </>
+    </StoreContext.Provider>
   );
 }
 

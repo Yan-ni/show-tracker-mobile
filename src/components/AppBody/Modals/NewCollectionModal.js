@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Button, TextInputGroupe, Modal } from '../../basicComponents';
 
+import { StoreContext } from '../../../App';
+
 export default function NewCollectionModal({
-  collectionStore,
   setAddCollectionModalVisibility,
   ...props
 }) {
+  const { collectionStore } = useContext(StoreContext);
+  
   const [isLoading, setIsLoading] = useState(false);
   const [collectionName, setCollectionName] = useState('');
   const [collectionNameErrorMessage, setCollectionNameErrorMessage] = useState(null);

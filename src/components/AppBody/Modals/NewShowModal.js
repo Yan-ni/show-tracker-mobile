@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'; 
 import { Button, Modal, TextInputGroupe } from '../../basicComponents';
 
+import { StoreContext } from '../../../App';
+
 export default function NewShowModal({
   setAddShowModalVisibility,
-  collectionStore,
   ...props
 }) {
+  const { collectionStore } = useContext(StoreContext);
+
   const [isLoading, setIsLoading] = useState(false);
   const [showName, setShowName] = useState('');
   const [showDescription, setShowDescription] = useState('');

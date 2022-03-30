@@ -4,10 +4,10 @@ import { StyleSheet, View } from 'react-native';
 import AppBody from '../components/AppBody';
 import AppHead from '../components/AppHead';
 
-function AppScreen({connectionStore}) {
+function AppScreen() {
   return (
     <View style={styles.mainView}>
-      <AppHead connectionStore={connectionStore} />
+      <AppHead />
       <AppBody />
     </View>
   );

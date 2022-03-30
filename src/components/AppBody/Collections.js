@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Pressable,
   ScrollView,
@@ -10,7 +10,11 @@ import {
 import { Button } from '../basicComponents';
 import NewCollectionModal from './Modals/NewCollectionModal';
 
-function Collections({collectionStore}) {
+import { StoreContext } from '../../App';
+
+function Collections() {
+  const { collectionStore } = useContext(StoreContext);
+
   const [addCollectionModalVisibility, setAddCollectionModalVisibility] =
     useState(false);
 
@@ -52,7 +56,6 @@ function Collections({collectionStore}) {
       </Button>
 
       <NewCollectionModal
-        collectionStore={collectionStore}
         setAddCollectionModalVisibility={setAddCollectionModalVisibility}
         visible={addCollectionModalVisibility}
         animationType="fade"

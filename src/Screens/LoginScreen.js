@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -12,7 +12,11 @@ import {
 } from 'react-native';
 import { Button, TextInputGroupe } from '../components/basicComponents'; 
 
-function LoginScreen({connectionStore}) {
+import { StoreContext } from '../App';
+
+function LoginScreen() {
+  const { connectionStore } = useContext(StoreContext);
+
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-export default function Header({connectionStore}) {
+import { StoreContext } from '../../App';
+
+export default function Header() {
+  const { connectionStore } = useContext(StoreContext);
+
   return (
     <View style={styles.headerView}>
       <Text style={styles.appNameText}>Show Tracker</Text>

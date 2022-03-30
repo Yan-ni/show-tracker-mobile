@@ -1,10 +1,14 @@
 import { observer } from 'mobx-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import collectionStore from '../../stores/collectionStore';
 import { Button } from '../basicComponents';
 
-function Shows({collectionStore}) {
+import { StoreContext } from '../../App';
+
+function Shows() {
+  const { collectionStore } = useContext(StoreContext);
+
   return (
     <ScrollView
       style={{
@@ -44,7 +48,7 @@ function Shows({collectionStore}) {
         </Text>
       )}
 
-      <CollectionOptions collectionStore={collectionStore} />
+      <CollectionOptions />
     </ScrollView>
   );
 }
@@ -276,63 +280,67 @@ const ThreeDots = () => (
   </View>
 );
 
-const CollectionOptions = ({collectionStore}) => (
-  <View
-    style={{
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginVertical: 20,
-    }}>
-    <Button
-      buttonStyle={{
-        borderRadius: 20,
-        marginRight: 15,
-      }}
-      textStyle={{
-        fontSize: 12,
-      }}
-      onPress={() => {
-        Alert.alert(
-          'Error',
-          "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
-          [
-            {
-              text: 'ok',
-            },
-          ],
-          {
-            cancelable: true,
-          },
-        );
+const CollectionOptions = () => {
+  const { collectionStore } = useContext(StoreContext);
+
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 20,
       }}>
-      Edit collection
-    </Button>
-    <Button
-      buttonStyle={{borderRadius: 20, backgroundColor: '#A10909'}}
-      textStyle={{
-        fontSize: 12,
-      }}
-      onPress={() => {
-        Alert.alert(
-          'Warning',
-          'are you sure you want to delete this collection ?',
-          [
+      <Button
+        buttonStyle={{
+          borderRadius: 20,
+          marginRight: 15,
+        }}
+        textStyle={{
+          fontSize: 12,
+        }}
+        onPress={() => {
+          Alert.alert(
+            'Error',
+            "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
+            [
+              {
+                text: 'ok',
+              },
+            ],
             {
-              text: 'no',
+              cancelable: true,
             },
+          );
+        }}>
+        Edit collection
+      </Button>
+      <Button
+        buttonStyle={{borderRadius: 20, backgroundColor: '#A10909'}}
+        textStyle={{
+          fontSize: 12,
+        }}
+        onPress={() => {
+          Alert.alert(
+            'Warning',
+            'are you sure you want to delete this collection ?',
+            [
+              {
+                text: 'no',
+              },
+              {
+                text: 'yes',
+                onPress: () => collectionStore.deleteCollection(),
+              },
+            ],
             {
-              text: 'yes',
-              onPress: () => collectionStore.deleteCollection(),
+              cancelable: true,
             },
-          ],
-          {
-            cancelable: true,
-          },
-        );
-      }}>
-      delete collection
-    </Button>
-  </View>
-);
+          );
+        }}>
+        delete collection
+      </Button>
+    </View>
+  );
+}

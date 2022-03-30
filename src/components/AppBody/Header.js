@@ -8,7 +8,7 @@ import {
 import { Button } from '../basicComponents';
 import NewShowModal from './Modals/NewShowModal';
 
-export default function AppBodyHeader({collectionStore}) {
+export default function AppBodyHeader() {
   const [addShowModalVisibility, setAddShowModalVisibility] = useState(false);
 
   return (
@@ -28,7 +28,6 @@ export default function AppBodyHeader({collectionStore}) {
       </Button>
 
       <NewShowModal
-        collectionStore={collectionStore}
         setAddShowModalVisibility={setAddShowModalVisibility}
         visible={addShowModalVisibility}
         animationType="fade"
