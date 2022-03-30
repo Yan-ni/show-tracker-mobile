@@ -40,6 +40,7 @@ export default function NewShowModal({
             placeholder="Name"
             style={{marginTop: 20}}
             errorMessage={showNameErrorMessage}
+            defaultValue={showName}
             onChangeText={text => {
               setShowName(text);
               setShowNameErrorMessage(null);
@@ -53,6 +54,7 @@ export default function NewShowModal({
             placeholder="show's synopsis"
             textAlignVertical="top"
             style={{marginTop: 20}}
+            defaultValue={showDescription}
             onChangeText={text => setShowDescription(text)}>
             Show Descreption
           </TextInputGroupe>
@@ -83,7 +85,7 @@ export default function NewShowModal({
                 textAlign="center"
                 keyboardType="numeric"
                 TextInputStyle={{padding: 5, paddingBottom: 2}}
-                value={seasonsWatched}
+                defaultValue={seasonsWatched}
                 selectTextOnFocus
                 onChangeText={text => setSeasonsWatched(text)}
               />
@@ -107,7 +109,7 @@ export default function NewShowModal({
                 textAlign="center"
                 keyboardType="numeric"
                 TextInputStyle={{padding: 5, paddingBottom: 2}}
-                value={episodesWatched}
+                defaultValue={episodesWatched}
                 selectTextOnFocus
                 onChangeText={text => setEpisodesWatched(text)}
               />

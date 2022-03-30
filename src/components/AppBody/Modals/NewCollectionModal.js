@@ -35,6 +35,7 @@ export default function NewCollectionModal({
             placeholder="Name"
             style={{marginTop: 20}}
             errorMessage={collectionNameErrorMessage}
+            defaultValue={collectionName}
             onChangeText={text => {
               setCollectionName(text);
               setCollectionNameErrorMessage(null);
