@@ -15,7 +15,7 @@ export default function Button({
   if (rounded) {
     if (!buttonStyle) var buttonStyle = {};
 
-    // only the width or the height need to specified
+    // only the width or the height need to be specified
     buttonStyle.width = buttonStyle.width || buttonStyle.height;
     buttonStyle.height = buttonStyle.width;
 
@@ -32,7 +32,7 @@ export default function Button({
 
   return (
     <TouchableHighlight
-      activeOpacity={1}
+      activeOpacity={true}
       underlayColor={
         pressBackground ||
         buttonStyle?.backgroundColor ||
