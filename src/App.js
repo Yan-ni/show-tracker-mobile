@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import AppScreen from './Screens/AppScreen';
 import LoginScreen from './Screens/LoginScreen';
 
-import connectionStore from './stores/conncetionStore';
+import connectionStore from './stores/connectionStore';
 import collectionStore from './stores/collectionStore';
 
 export const StoreContext = createContext();
