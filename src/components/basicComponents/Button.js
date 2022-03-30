@@ -32,7 +32,7 @@ export default function Button({
 
   return (
     <TouchableHighlight
-      activeOpacity={true}
+      activeOpacity={1}
       underlayColor={
         pressBackground ||
         buttonStyle?.backgroundColor ||
