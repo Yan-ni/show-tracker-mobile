@@ -80,9 +80,9 @@ class ConnectionStore {
           const errors = error.response.data.errors;
 
           errors.forEach(error => {
-            if (error.field === 'username')
+            if (error.path[0] === 'username')
               this.setUsernameErrorMessage(error.message);
-            else if (error.field === 'password')
+            else if (error.path[0] === 'password')
               this.setPasswordErrorMessage(error.message);
           });
         } else {

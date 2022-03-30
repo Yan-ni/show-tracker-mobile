@@ -10,7 +10,7 @@ export default function NewCollectionModal({
   ...props
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [collectionName, setCollectionName] = useState(null);
+  const [collectionName, setCollectionName] = useState('');
   const [collectionNameErrorMessage, setCollectionNameErrorMessage] = useState(null);
 
   return (
