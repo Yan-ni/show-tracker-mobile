@@ -7,7 +7,7 @@ import {
   Text,
   View
 } from 'react-native';
-import Button from '../Button';
+import { Button } from '../basicComponents';
 import NewCollectionModal from './Modals/NewCollectionModal';
 
 function Collections({collectionStore}) {

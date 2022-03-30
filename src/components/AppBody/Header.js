@@ -5,7 +5,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native';
-import Button from '../Button';
+import { Button } from '../basicComponents';
 import NewShowModal from './Modals/NewShowModal';
 
 export default function AppBodyHeader({collectionStore}) {

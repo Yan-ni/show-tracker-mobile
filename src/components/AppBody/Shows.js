@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import collectionStore from '../../stores/collectionStore';
-import Button from '../Button';
+import { Button } from '../basicComponents';
 
 function Shows({collectionStore}) {
   return (

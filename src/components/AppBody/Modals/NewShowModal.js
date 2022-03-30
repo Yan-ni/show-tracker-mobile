@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import Button from '../../Button';
-import Modal from '../../Modal';
-import TextInputGroupe from '../../TextInputGroupe';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'; 
+import { Button, Modal, TextInputGroupe } from '../../basicComponents';
 
 export default function NewShowModal({
   setAddShowModalVisibility,

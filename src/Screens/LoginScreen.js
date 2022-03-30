@@ -10,8 +10,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import Button from '../components/Button';
-import TextInputGroupe from '../components/TextInputGroupe';
+import { Button, TextInputGroupe } from '../components/basicComponents'; 
 
 function LoginScreen({connectionStore}) {
   const [isLoading, setIsLoading] = useState(false);
