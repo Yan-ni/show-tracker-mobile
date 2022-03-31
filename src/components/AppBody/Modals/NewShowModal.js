@@ -159,8 +159,8 @@ export default function NewShowModal({
                       setAddShowModalVisibility(false);
                       setShowName('');
                       setShowDescription('');
-                      setSeasonsWatched(0);
-                      setEpisodesWatched(0);
+                      setSeasonsWatched('0');
+                      setEpisodesWatched('0');
                     }
                   })
                   .finally(() => setIsLoading(false));
