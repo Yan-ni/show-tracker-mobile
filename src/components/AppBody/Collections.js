@@ -3,12 +3,12 @@ import React, { useState, useContext } from 'react';
 import {
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
   View
 } from 'react-native';
 import { Button } from '../basicComponents';
 import NewCollectionModal from './Modals/NewCollectionModal';
+import styles from '../../styles/collections';
 
 import { StoreContext } from '../../App';
 
@@ -20,18 +20,11 @@ function Collections() {
 
   return (
     <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 15,
-      }}>
+      style={[styles.row, styles.alignCenter , { marginTop: 15 }]}>
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        style={{
-          flex: 1,
-        }}>
+        style={{ flex: 1 }}>
         {collectionStore.collections &&
           collectionStore.collections.map(
             ({collection_id, collection_name}) => (
@@ -66,26 +59,6 @@ function Collections() {
 
 export default observer(Collections);
 
-const styles = StyleSheet.create({
-  test: {
-    color: '#000',
-    fontFamily: 'Poppins-Medium',
-    paddingBottom: 10,
-    paddingTop: 15,
-    paddingHorizontal: 15,
-  },
-  selected: {
-    borderBottomWidth: 3,
-    borderBottomColor: '#2745F2',
-  },
-  center: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-});
-
 const Collection = ({
   children,
   collection_id,
@@ -95,7 +68,7 @@ const Collection = ({
   <Pressable onPress={() => setSelectedCollectionId(collection_id)}>
     <Text
       style={[
-        styles.test,
+        styles.collectionText,
         collection_id === selectedCollectionId ? styles.selected : {},
       ]}>
       {children}

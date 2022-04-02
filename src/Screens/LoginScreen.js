@@ -5,12 +5,13 @@ import {
   Alert,
   Keyboard,
   Pressable,
-  StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import { Button, TextInputGroupe } from '../components/basicComponents'; 
+import { Button, TextInputGroupe } from '../components/basicComponents';
+
+import styles from '../styles/loginScreen';
 
 import { StoreContext } from '../App';
 
@@ -23,7 +24,7 @@ function LoginScreen() {
 
   if (isLoading)
     return (
-      <View style={styles.center}>
+      <View style={styles.loading}>
         <ActivityIndicator size="large" color="#2745F2" />
       </View>
     );
@@ -35,7 +36,7 @@ function LoginScreen() {
           onPress={Keyboard.dismiss}
           accessible={false}>
           <View style={styles.loginContainer}>
-            <Text style={textStyles.loginText}>Login</Text>
+            <Text style={styles.loginHeading}>Login</Text>
 
             <TextInputGroupe
               autoComplete="username"
@@ -78,7 +79,7 @@ function LoginScreen() {
                   },
                 )
               }>
-              <Text style={textStyles.LinkText}>Forgot Password ?</Text>
+              <Text style={styles.a}>Forgot Password ?</Text>
             </Pressable>
 
             <Pressable
@@ -96,10 +97,10 @@ function LoginScreen() {
                   },
                 )
               }>
-              <Text style={textStyles.LinkText}>create an account</Text>
+              <Text style={styles.a}>create an account</Text>
             </Pressable>
             <Button
-              buttonStyle={{alignSelf: 'flex-end', backgroundColor: '#1B78F2'}}
+              buttonStyle={styles.loginButton}
               onPress={() => {
                 setIsLoading(true);
                 connectionStore
@@ -116,46 +117,3 @@ function LoginScreen() {
 }
 
 export default observer(LoginScreen);
-
-const textStyles = StyleSheet.create({
-  loginText: {
-    alignSelf: 'center',
-    color: '#121A5B',
-    fontFamily: 'Poppins-SemiBold',
-    fontSize: 24,
-    paddingTop: 5,
-    paddingBottom: 15,
-  },
-  LinkText: {
-    color: '#1B78F2',
-    fontFamily: 'Poppins-Medium',
-    fontSize: 15,
-    paddingVertical: 3,
-  },
-});
-
-const styles = StyleSheet.create({
-  mainView: {
-    backgroundColor: '#f7f7f7',
-    display: 'flex',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loginContainer: {
-    display: 'flex',
-    alignItems: 'stretch',
-    backgroundColor: '#fff',
-    padding: 20,
-    width: '90%',
-    elevation: 5,
-    borderRadius: 10,
-  },
-  center: {
-    display: 'flex',
-    alignContent: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import {
   Alert,
-  Image, TextInput,
+  Image,
+  TextInput,
   TouchableHighlight,
   View
 } from 'react-native';
 import { Button } from '../basicComponents';
 import NewShowModal from './Modals/NewShowModal';
+import styles from '../../styles/appBodyHeader';
 
 export default function AppBodyHeader() {
   const [addShowModalVisibility, setAddShowModalVisibility] = useState(false);
 
   return (
     <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}>
-      <Button
-        buttonStyle={{
-          backgroundColor: '#2745F2',
-        }}
-        onPress={() => setAddShowModalVisibility(true)}>
+      style={[styles.row, styles.alignCenter, styles.justifySpaceBetween]}>
+      <Button onPress={() => setAddShowModalVisibility(true)}>
         + Add show
       </Button>
 
@@ -42,45 +35,16 @@ export default function AppBodyHeader() {
 
 const SearchInput = () => (
   <View
-    style={{
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: '#f5f5f5',
-      borderRadius: 5,
-      elevation: 3,
-    }}>
+    style={styles.searchInputContainer}>
     <TextInput
-      style={{
-        backgroundColor: '#f5f5f5',
-        color: '#000',
-        paddingHorizontal: 10,
-        height: 40,
-        width: 110,
-        borderTopLeftRadius: 5,
-        borderBottomLeftRadius: 5,
-      }}
+      style={styles.searchInput}
       placeholder="Search shows"
       placeholderTextColor="#999"
     />
     {/* I had to use another view to make the padding with the image */}
-    <View
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f5f5f5',
-        height: 40,
-        paddingRight: 15,
-        paddingLeft: 5,
-        borderTopRightRadius: 5,
-        borderBottomRightRadius: 5,
-      }}>
+    <View style={styles.searchIconContainer}>
       <Image
-        style={{
-          width: 20,
-          height: 20,
-        }}
+        style={styles.icon}
         source={require('../../assets/images/search.png')}
       />
     </View>
@@ -89,15 +53,7 @@ const SearchInput = () => (
 
 const FilterButton = () => (
   <TouchableHighlight
-    style={{
-      backgroundColor: '#f5f5f5',
-      width: 40,
-      height: 40,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 5,
-    }}
+    style={styles.filter}
     underlayColor="#eee"
     onPress={() => {
       Alert.alert(
@@ -114,7 +70,7 @@ const FilterButton = () => (
       );
     }}>
     <Image
-      style={{height: 20, width: 20}}
+      style={styles.icon}
       source={require('../../assets/images/filter.png')}
     />
   </TouchableHighlight>

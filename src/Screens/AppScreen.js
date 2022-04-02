@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppBody from '../components/AppBody';
 import AppHead from '../components/AppHead';
+import styles from '../styles/appScreen';
 
 function AppScreen() {
   return (
@@ -14,12 +15,3 @@ function AppScreen() {
 }
 
 export default observer(AppScreen);
-
-const styles = StyleSheet.create({
-  mainView: {
-    display: 'flex',
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#f7f7f7',
-  },
-});

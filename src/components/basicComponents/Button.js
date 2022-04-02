@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableHighlight, Vibration } from 'react-native';
+import styles from '../../styles/button';
 
 export default function Button({
   textStyle,
@@ -36,12 +37,12 @@ export default function Button({
       underlayColor={
         pressBackground ||
         buttonStyle?.backgroundColor ||
-        defaultStyles.button.backgroundColor
+        styles.button.backgroundColor
       }
       style={
         isPress
-          ? [defaultStyles.button, buttonStyle]
-          : [defaultStyles.button, buttonStyle, pressStyle]
+          ? [styles.button, buttonStyle]
+          : [styles.button, buttonStyle, pressStyle]
       }
       onHideUnderlay={() => setIsPress(false)}
       onShowUnderlay={() => setIsPress(true)}
@@ -49,26 +50,7 @@ export default function Button({
         Vibration.vibrate(50);
         onPress();
       }}>
-      <Text style={[defaultStyles.buttonText, textStyle]}>{children}</Text>
+      <Text style={[styles.buttonText, textStyle]}>{children}</Text>
     </TouchableHighlight>
   );
 }
-
-const defaultStyles = StyleSheet.create({
-  button: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#2745F2',
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    borderRadius: 5,
-    elevation: 3,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    paddingTop: 3,
-    fontFamily: 'Poppins-Regular',
-  },
-});

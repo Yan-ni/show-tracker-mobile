@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, Pressable, Text, View } from 'react-native';
+import styles from '../../styles/appHead';
 
 import { StoreContext } from '../../App';
 
@@ -10,11 +11,7 @@ export default function Header() {
     <View style={styles.headerView}>
       <Text style={styles.appNameText}>Show Tracker</Text>
 
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-        }}>
+      <View style={styles.row}>
         <Pressable
           onPress={() =>
             Alert.alert(
@@ -31,11 +28,7 @@ export default function Header() {
             )
           }>
           <Image
-            style={{
-              width: 22,
-              height: 22,
-              marginRight: 18,
-            }}
+            style={[styles.icon, { marginRight: 18 }]}
             source={require('../../assets/images/settings.png')}
           />
         </Pressable>
@@ -60,10 +53,7 @@ export default function Header() {
             );
           }}>
           <Image
-            style={{
-              width: 22,
-              height: 22,
-            }}
+            style={styles.icon}
             source={require('../../assets/images/logout.png')}
           />
         </Pressable>
@@ -71,23 +61,3 @@ export default function Header() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  headerView: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 20,
-    backgroundColor: '#fff',
-    width: '90%',
-    borderRadius: 10,
-    marginVertical: 20,
-    elevation: 5,
-  },
-  appNameText: {
-    fontFamily: 'Poppins-Bold',
-    fontSize: 18,
-    color: '#121A5B',
-  },
-});
