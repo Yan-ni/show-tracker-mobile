@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'; 
+import { ActivityIndicator, Text, View } from 'react-native'; 
 import { Button, Modal, TextInputGroupe } from '../../basicComponents';
+import styles from '../../../styles/newShowModal';
 
 import { StoreContext } from '../../../App';
 
@@ -22,18 +23,13 @@ export default function NewShowModal({
   return (
     <Modal {...props}>
       {isLoading ? (
-        <View style={styles.center}>
+        <View style={[styles.center, { flex: 1 }]}>
           <ActivityIndicator size="large" color="#2745F2" />
         </View>
       ) : (
         <>
           <Text
-            style={{
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: 24,
-              color: '#1B78F2',
-              textAlign: 'center',
-            }}>
+            style={[styles.h1, { color: '#1B78F2', textAlign: 'center' }]}>
             New show
           </Text>
 
@@ -61,25 +57,13 @@ export default function NewShowModal({
           </TextInputGroupe>
 
           <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-evenly',
-              marginTop: 20,
-            }}>
-            <View
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}>
+            style={[styles.row, styles.alignCenter, styles.justifySpaceAround, { marginTop: 20 }]}>
+            <View style={styles.alignCenter}>
               <Text
-                style={{
+                style={[styles.text, {
                   fontFamily: 'Poppins-SemiBold',
-                  fontSize: 16,
-                  color: '#333',
                   marginBottom: 10,
-                }}>
+                }]}>
                 seasons watched
               </Text>
               <TextInputGroupe
@@ -92,18 +76,12 @@ export default function NewShowModal({
               />
             </View>
 
-            <View
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}>
+            <View style={styles.alignCenter}>
               <Text
-                style={{
+                style={[styles.label, {
                   fontFamily: 'Poppins-SemiBold',
-                  fontSize: 16,
-                  color: '#333',
                   marginBottom: 10,
-                }}>
+                }]}>
                 episodes watched
               </Text>
               <TextInputGroupe
@@ -117,14 +95,7 @@ export default function NewShowModal({
             </View>
           </View>
 
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              marginTop: 30,
-            }}>
+          <View style={styles.buttonsContainer}>
             <Button
               buttonStyle={{
                 backgroundColor: '#EBEBEB',
@@ -173,12 +144,3 @@ export default function NewShowModal({
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  center: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-});

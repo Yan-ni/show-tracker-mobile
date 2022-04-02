@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { Button, TextInputGroupe, Modal } from '../../basicComponents';
+import styles from '../../../styles/newCollectionModal';
 
 import { StoreContext } from '../../../App';
 
@@ -17,18 +18,16 @@ export default function NewCollectionModal({
   return (
     <Modal {...props}>
       {isLoading ? (
-        <View style={styles.center}>
+        <View style={[styles.center, { flex: 1 }]}>
           <ActivityIndicator size="large" color="#2745F2" />
         </View>
       ) : (
         <>
           <Text
-            style={{
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: 24,
+            style={[styles.h1, {
               color: '#1B78F2',
               textAlign: 'center',
-            }}>
+            }]}>
             New collection
           </Text>
 
@@ -45,13 +44,7 @@ export default function NewCollectionModal({
           </TextInputGroupe>
 
           <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              marginTop: 30,
-            }}>
+            style={styles.buttonsContainer}>
             <Button
               buttonStyle={{
                 backgroundColor: '#EBEBEB',
@@ -95,11 +88,3 @@ export default function NewCollectionModal({
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  center: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1
-  }
-});
