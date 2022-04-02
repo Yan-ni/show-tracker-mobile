@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Alert,
+  Appearance,
   Image,
   TextInput,
   TouchableHighlight,
@@ -33,45 +34,56 @@ export default function AppBodyHeader() {
   );
 }
 
-const SearchInput = () => (
-  <View
-    style={styles.searchInputContainer}>
-    <TextInput
-      style={styles.searchInput}
-      placeholder="Search shows"
-      placeholderTextColor="#999"
-    />
-    {/* I had to use another view to make the padding with the image */}
-    <View style={styles.searchIconContainer}>
+const SearchInput = () => {
+  const colorScheme = Appearance.getColorScheme();
+
+  return (
+    <View
+      style={styles.searchInputContainer}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search shows"
+      />
+      {/* I had to use another view to make the padding with the image */}
+      <View style={styles.searchIconContainer}>
+        <Image
+          style={styles.icon}
+          source={colorScheme === 'dark' ? 
+            require('../../assets/images/darkTheme/search.png') : 
+            require('../../assets/images/lightTheme/search.png')
+        }/>
+      </View>
+    </View>
+  );
+}
+
+const FilterButton = () => {
+  const colorScheme = Appearance.getColorScheme();
+
+  return (
+    <TouchableHighlight
+      style={styles.filter}
+      underlayColor="#eee"
+      onPress={() => {
+        Alert.alert(
+          'Error',
+          "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
+          [
+            {
+              text: 'ok',
+            },
+          ],
+          {
+            cancelable: true,
+          },
+        );
+      }}>
       <Image
         style={styles.icon}
-        source={require('../../assets/images/search.png')}
-      />
-    </View>
-  </View>
-);
-
-const FilterButton = () => (
-  <TouchableHighlight
-    style={styles.filter}
-    underlayColor="#eee"
-    onPress={() => {
-      Alert.alert(
-        'Error',
-        "the app is still in developpement and this feature isn't available yet.\n\nPlease stay up to date with the latest version.",
-        [
-          {
-            text: 'ok',
-          },
-        ],
-        {
-          cancelable: true,
-        },
-      );
-    }}>
-    <Image
-      style={styles.icon}
-      source={require('../../assets/images/filter.png')}
-    />
-  </TouchableHighlight>
-);
+        source={colorScheme === 'dark' ? 
+          require('../../assets/images/darkTheme/filter.png') : 
+          require('../../assets/images/lightTheme/filter.png')
+        }/>
+    </TouchableHighlight>
+  );
+}

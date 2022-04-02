@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
-import { Alert, Image, Pressable, Text, View } from 'react-native';
+import { Alert, Appearance, Image, Pressable, Text, View } from 'react-native';
 import styles from '../../styles/appHead';
 
 import { StoreContext } from '../../App';
 
 export default function Header() {
+  const colorScheme = Appearance.getColorScheme();
+
   const { connectionStore } = useContext(StoreContext);
 
   return (
@@ -29,8 +31,10 @@ export default function Header() {
           }>
           <Image
             style={[styles.icon, { marginRight: 18 }]}
-            source={require('../../assets/images/settings.png')}
-          />
+            source={colorScheme === 'dark' ? 
+              require('../../assets/images/darkTheme/settings.png') : 
+              require('../../assets/images/lightTheme/settings.png')
+            }/>
         </Pressable>
 
         <Pressable
@@ -54,8 +58,10 @@ export default function Header() {
           }}>
           <Image
             style={styles.icon}
-            source={require('../../assets/images/logout.png')}
-          />
+            source={colorScheme === 'dark' ? 
+              require('../../assets/images/darkTheme/logout.png') : 
+              require('../../assets/images/lightTheme/logout.png')
+            }/>
         </Pressable>
       </View>
     </View>

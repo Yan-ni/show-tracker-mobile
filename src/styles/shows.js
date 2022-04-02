@@ -18,12 +18,12 @@ export default StyleSheet.create({
   emptyCollectionText: {
     fontFamily: 'Popping-Medium',
     fontSize: 30,
-    color: '#999',
+    color: colors.fadeColor,
     paddingVertical: 50,
     textAlign: 'center',
   },
   showCard: {
-    backgroundColor: '#F2F2F2',
+    backgroundColor: colors.tritaryBackgroundColor,
     borderRadius: 5,
     padding: 10,
     marginTop: 15,

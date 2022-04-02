@@ -1,20 +1,9 @@
-export const colors = {
-  primaryBackgroundColor: '#FFFFFF',
-  secondaryBackgroundColor: '#F7F7F7',
-  tritaryBackgroundColor: '#F2F2F2',
+import { Appearance } from 'react-native';
+import { lightTheme, darkTheme } from '../config/colors.config';
 
-  primaryColor: '#2745F2',
-  secondaryColor: '#121A5B',
-  tritaryColor: '#1B78F2',
-  fadeColor: '#999999',
+const colorScheme = Appearance.getColorScheme();
 
-  dangerColor: '#F06760',
-  successColor: '',
-
-  labelColor: '#333333',
-  inputBackgroundColor: '#CED8DE',
-  inputColor: '#000000',
-};
+export const colors = colorScheme === 'dark' ? darkTheme : lightTheme;
 
 export const globals = {
   row: {
@@ -63,7 +52,7 @@ export const globals = {
   label: {
     fontFamily: 'Poppins-Medium',
     color: colors.labelColor,
-    fontSize: 18,
+    fontSize: 16,
     marginVertical: 3,
   },
   span: {
@@ -73,7 +62,7 @@ export const globals = {
   input: {
     fontFamily: 'Poppins-Regular',
     color: colors.inputColor,
-    borderColor: colors.inputBackgroundColor,
+    borderColor: colors.inputBorderColor,
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
