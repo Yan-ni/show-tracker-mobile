@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Alert,
   Appearance,
@@ -10,6 +10,7 @@ import {
 import { Button } from '../basicComponents';
 import NewShowModal from './Modals/NewShowModal';
 import styles from '../../styles/appBodyHeader';
+import { StoreContext } from '../../App';
 
 export default function AppBodyHeader() {
   const [addShowModalVisibility, setAddShowModalVisibility] = useState(false);
@@ -35,6 +36,8 @@ export default function AppBodyHeader() {
 }
 
 const SearchInput = () => {
+  const { collectionStore } = useContext(StoreContext);
+  
   const colorScheme = Appearance.getColorScheme();
 
   return (
@@ -43,6 +46,7 @@ const SearchInput = () => {
       <TextInput
         style={styles.searchInput}
         placeholder="Search shows"
+        onChangeText={text => collectionStore.setSearchInputText(text)}
       />
       {/* I had to use another view to make the padding with the image */}
       <View style={styles.searchIconContainer}>

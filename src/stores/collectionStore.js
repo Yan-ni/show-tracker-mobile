@@ -14,12 +14,19 @@ class CollectionStore {
       setDisplayedShows: action,
       syncCollections: action,
       addShow: action,
+      searchInputText: observable,
+      setSearchInputText: action
     });
   }
 
   collections = [];
   selectedCollectionId = null;
   displayedShows = [];
+  searchInputText = '';
+
+  setSearchInputText(text) {
+    this.searchInputText = text;
+  }
 
   setDisplayedShows(shows) {
     this.displayedShows = shows;

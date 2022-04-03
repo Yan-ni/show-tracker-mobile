@@ -14,7 +14,12 @@ function Shows() {
     <ScrollView style={{ flex: 1 }}>
       {collectionStore.displayedShows &&
       collectionStore.displayedShows.length ? (
-        collectionStore.displayedShows.map(
+        collectionStore.displayedShows
+        .filter(({show_name}) => {
+          const textMatch = show_name.match(collectionStore.searchInputText);
+          return (textMatch && textMatch.length);
+        })
+        .map(
           ({
             show_name,
             show_description,
