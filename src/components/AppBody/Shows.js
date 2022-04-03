@@ -16,7 +16,7 @@ function Shows() {
       collectionStore.displayedShows.length ? (
         collectionStore.displayedShows
         .filter(({show_name}) => {
-          const textMatch = show_name.match(collectionStore.searchInputText);
+          const textMatch = show_name.toLowerCase().match(collectionStore.searchInputText.toLowerCase());
           return (textMatch && textMatch.length);
         })
         .map(
