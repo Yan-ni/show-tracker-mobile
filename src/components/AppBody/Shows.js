@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
-import React, { useEffect, useState, useContext } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState, useContext, useRef } from 'react';
+import { Alert, ScrollView, Text, View } from 'react-native';
 import collectionStore from '../../stores/collectionStore';
 import { Button } from '../basicComponents';
 import styles from '../../styles/shows';
@@ -50,6 +50,7 @@ function Shows() {
 
 export default observer(Shows);
 
+
 const Show = ({
   showName,
   showDescription,
@@ -64,14 +65,19 @@ const Show = ({
   const [counterEpisodesWatched, setCounterEpisodesWatched] =
     useState(episodesWatched);
 
+  const didMountRef = useRef(false);
+
   useEffect(() => {
-    collectionStore.updateShow({
-      showId,
-      showName,
-      showDescription,
-      seasonsWatched: counterSeasonsWatched,
-      episodesWatched: counterEpisodesWatched,
-    });
+    if (didMountRef.current) 
+      return collectionStore.updateShow({
+        showId,
+        showName,
+        showDescription,
+        seasonsWatched: counterSeasonsWatched,
+        episodesWatched: counterEpisodesWatched,
+      });
+
+    didMountRef.current = true;
   }, [counterSeasonsWatched, counterEpisodesWatched]);
 
   const trimToMaxLength = (text, maxLength) => {
