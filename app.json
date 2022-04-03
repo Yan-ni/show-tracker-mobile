@@ -5,7 +5,7 @@
     "slug": "show-tracker",
     "owner": "yan-ni",
     "sdkVersion": "44.0.0",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "icon": "android/app/src/main/res/playstore-icon.png",
@@ -16,7 +16,7 @@
     },
     "android": {
       "package": "com.yanni.showtracker",
-      "versionCode": 6
+      "versionCode": 7
     },
     "assetBundlePatterns": [
       "src/assets/images/lightTheme/*",

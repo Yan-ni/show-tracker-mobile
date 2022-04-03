@@ -46,6 +46,7 @@ const SearchInput = () => {
       <TextInput
         style={styles.searchInput}
         placeholder="Search shows"
+        placeholderTextColor="#BFBFBF"
         onChangeText={text => collectionStore.setSearchInputText(text)}
       />
       {/* I had to use another view to make the padding with the image */}
