@@ -18,9 +18,9 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  primaryBackgroundColor: '#2F3251',
-  secondaryBackgroundColor: '#3A3E5F',
-  tritaryBackgroundColor: '#3E4474',
+  primaryBackgroundColor: '#262626',
+  secondaryBackgroundColor: '#404040',
+  tritaryBackgroundColor: '#191919',
 
   primaryColor: '#2745F2',
   secondaryColor: '#FFFFFF',
