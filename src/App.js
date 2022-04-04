@@ -21,7 +21,7 @@ function App() {
 
   return (
     <StoreContext.Provider value={{connectionStore, collectionStore}}>
-      <StatusBar backgroundColor="#ffffff00" barStyle="dark-content" />
+      <StatusBar backgroundColor="#40404000" barStyle="dark-content" />
       {fontsLoaded &&
         (connectionStore.isConnected ? (
           <AppScreen />
